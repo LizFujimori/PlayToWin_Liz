@@ -18,6 +18,12 @@ app.get("/usuarios/novo", (req, res) => {
     res.sendFile(`${__dirname}/views/formUsuario.html`);
 });
 
+app.get("/jogos/novo", (req, res) => {
+    res.sendFile(`${__dirname}/views/formJogo.html`);
+});
+
+
+
 app.post("/usuarios/novo", async (req, res) => {
     const dadosUsuario = {
         nickname: req.body.nickname,
@@ -28,6 +34,16 @@ app.post("/usuarios/novo", async (req, res) => {
     res.send("Usuario inserido com o id: " + usuario.id)
 });
 
+app.post("/jogos/novo", async (rep, res) => {
+    const dadosJogo = {
+        titulo: req.body.titulo,
+        descricao: req.body.descricao,
+        precoB: req.body.precoB,
+    };
+
+    const jogo = await Jogo.create(dadosJogo);
+    res.send("Jogo inserido com o id: " + jogo.id)
+});
 
 app.listen(8000, () => {
     console.log("rodandinho :P");
