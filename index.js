@@ -2,6 +2,7 @@ require("dotenv").config();
 const conn = require("./db/conn");
 
 const Usuario = require("./moldels/Usuario");
+const Jogo = require("./models/Jogo")
 
 const express = require("express");
 const app = express();
@@ -27,12 +28,10 @@ app.post("/usuarios/novo", async (req, res) => {
     res.send("Usuario inserido com o id: " + usuario.id)
 });
 
+
 app.listen(8000, () => {
     console.log("rodandinho :P");
 });
-
-
-
 
 conn
     .sync()
