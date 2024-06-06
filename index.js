@@ -39,7 +39,7 @@ app.post("/usuarios/novo", async (req, res) => {
 });
 
 app.get("/jogos/novo", (req, res) => {
-    res.sendFile(`${__dirname}/views/formJogo.html`);
+    res.render('jogo');
 });
 
 app.post("/jogos/novo", async (rep, res) => {
