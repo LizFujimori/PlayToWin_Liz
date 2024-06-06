@@ -9,9 +9,9 @@ const app = express();
 
 const handlebars = require ("express-handlebars")
 
-app.engene("handlebars", handlebars.engine());
+app.engine("handlebars", handlebars.engine());
 
-app.set ("view engine", "handlebars");
+app.set("view engine", "handlebars");
 
 app.use(express.urlencoded({extended: true}));
 
@@ -19,6 +19,14 @@ app.use(express.json());
 
 app.get("/usuarios/novo", (req, res) => {
     res.render('formUsuario');
+});
+
+app.get("/", (req, res) => {
+    res.render('home');
+});
+
+app.get("/usuarios", (req, res) => {
+    res.render('usuarios');
 });
 
 app.post("/usuarios/novo", async (req, res) => {
