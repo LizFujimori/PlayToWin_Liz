@@ -18,11 +18,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.get("/usuarios/novo", (req, res) => {
-    res.sendFile(`${__dirname}/views/formUsuario.html`);
-});
-
-app.get("/jogos/novo", (req, res) => {
-    res.sendFile(`${__dirname}/views/formJogo.html`);
+    res.render('formUsuario');
 });
 
 app.post("/usuarios/novo", async (req, res) => {
@@ -32,6 +28,10 @@ app.post("/usuarios/novo", async (req, res) => {
     };
     const usuario = await Usuario.create(dadosUsuario);
     res.send("Usuario inserido com o id: " + usuario.id)
+});
+
+app.get("/jogos/novo", (req, res) => {
+    res.sendFile(`${__dirname}/views/formJogo.html`);
 });
 
 app.post("/jogos/novo", async (rep, res) => {
