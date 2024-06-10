@@ -25,8 +25,9 @@ app.get("/", (req, res) => {
     res.render('home');
 });
 
-app.get("/usuarios", (req, res) => {
-    res.render('usuarios');
+app.get("/usuarios", async (req, res) => {
+    const usuarios = await Usuario.findAll({ raw: true})
+    res.render('usuarios', {usuarios});
 });
 
 app.post("/usuarios/novo", async (req, res) => {

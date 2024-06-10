@@ -1,1 +1,16 @@
 <h1> Usuários </h1>
+<a href="/usuarios/novo">Cadastrar Usuários</a>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Nickname</td>
+        <td>Nome</td>
+    </tr>
+    {{#each usuarios}}
+    <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.nickname}}</td>
+        <td>{{this.name}}</td>
+    </tr>
+    {{/each}}
+</table>
