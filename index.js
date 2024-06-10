@@ -53,6 +53,12 @@ app.post("/jogos/novo", async (rep, res) => {
     res.send("Jogo inserido com o id: " + jogo.id)
 });
 
+app.get("/usuarios/:id/atualizar", (req, res) => {
+    const id = req.params.id;
+    const usuario = Usuario.findByPk(id, { raw: true});
+    res.render("formUsuario"), { usuario };
+})
+
 app.listen(8000, () => {
     console.log("rodandinho :P");
 });
