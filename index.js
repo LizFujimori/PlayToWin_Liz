@@ -66,13 +66,22 @@ app.post("/usuarios/:id/atualizar", async (req, res) => {
         nome: req.body.nome,
     };
     const registroAfetados = await Usuario.update(dadosUsuario, { where: { id: id }});
-
-    if (registroAfetados > 0) {
-        res.redirect("/usuarios");
-    } else {
-        res.send("Erro ao atualizar :/");
-    }
+        if (registroAfetados > 0) {
+            res.redirect("/usuarios");
+        } else {
+            res.send("Erro ao atualizar :/");
+        }
 });
+
+app.post("usuarios/excluir", async (req, res) => {
+    const id = req.body.id;
+    const registroAfetados = await Usuario.destroy({ where: { id: id }});
+        if (registroAfetados > 0) {
+            res.redirect("/usuarios");
+        } else {
+            res.send("Erro ao excluir :/");
+    }1
+})
 
 app.listen(8000, () => {
     console.log("rodandinho :P");
