@@ -53,11 +53,26 @@ app.post("/jogos/novo", async (rep, res) => {
     res.send("Jogo inserido com o id: " + jogo.id)
 });
 
-app.get("/usuarios/:id/atualizar", (req, res) => {
+app.get("/usuarios/:id/atualizar", async (req, res) => {
     const id = req.params.id;
-    const usuario = Usuario.findByPk(id, { raw: true});
+    const usuario = await Usuario.findByPk(id, { raw: true});
     res.render("formUsuario"), { usuario };
 })
+
+app.post("/usuarios/:id/atualizar", async (req, res) => {
+    const id = req.params.id;
+    const dadosUsuario = {
+        nickname: req.body.nickname,
+        nome: req.body.nome,
+    };
+    const registroAfetados = await Usuario.update(dadosUsuario, { where: { id: id }});
+
+    if (registroAfetados > 0) {
+        res.redirect("/usuarios");
+    } else {
+        res.send("Erro ao atualizar :/");
+    }
+});
 
 app.listen(8000, () => {
     console.log("rodandinho :P");
@@ -72,8 +87,6 @@ conn
     .catch((err) => {
      console.log("erro :( " + err);
     });
-
-
 
 // conn
 //   .authenticate()
